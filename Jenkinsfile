@@ -23,20 +23,26 @@ pipeline {
         
         stage('Build') {
             steps {
-                sh 'chmod +x mvnw'
-                sh './mvnw clean compile'
+                dir('starter_code') {
+                    sh 'chmod +x mvnw'
+                    sh './mvnw clean compile'
+                }
             }
         }
         
         stage('Test') {
             steps {
-                sh './mvnw test'
+                dir('starter_code') {
+                    sh './mvnw test'
+                }
             }
         }
         
         stage('Package') {
             steps {
-                sh './mvnw package -DskipTests'
+                dir('starter_code') {
+                    sh './mvnw package -DskipTests'
+                }
             }
         }
     }
